@@ -9,7 +9,7 @@ export default function PersonalAccountLayout({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className={"container mx-auto"}>{children}</main>
     </>
   );
 }
