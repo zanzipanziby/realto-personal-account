@@ -15,7 +15,7 @@ interface PdfViewerProps {
   pdfUrl: string;
 }
 
-const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
+const PdfViewer = ({ pdfUrl }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1); // Текущая страница
 
@@ -34,15 +34,12 @@ const PdfViewer: React.FC<PdfViewerProps> = ({ pdfUrl }) => {
   return (
     <div className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg shadow-lg">
       {/* Область просмотра PDF */}
-
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
         <Page
           pageNumber={pageNumber}
-          // width={window.innerWidth > 768 ? 800 : 600} // Адаптивная ширина
-          className="shadow-inner"
+          width={window.innerWidth > 768 ? 800 : 360}
         />
       </Document>
-
       {/* Пагинация */}
       <div className="mt-4 flex items-center justify-center space-x-4">
         <Button onClick={goToPreviousPage} disabled={pageNumber <= 1}>
