@@ -5,8 +5,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Typography } from "@/components/custom/Typography";
+import PdfViewer from "@/components/custom/PdfViewer";
 
 export default function PersonalAccount() {
+  const pdfUrl = "/example.pdf";
   return (
     <div className={"mt-6"}>
       <Accordion type={"single"} collapsible={true}>
@@ -24,7 +26,7 @@ export default function PersonalAccount() {
               numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
               Assumenda atque ex maxime?
             </Typography>
-            <div className={"flex gap-3"}></div>
+            <PdfViewer pdfUrl={pdfUrl} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value={"item-2"}>
