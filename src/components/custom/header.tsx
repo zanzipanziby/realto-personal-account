@@ -16,7 +16,7 @@ export default function Header({ username = "John Doe" }: HeaderProps) {
     console.log("Logging out...");
     // In a real app, you would clear authentication state/cookies here
     // Then redirect to login page
-    router.push("/auth/login");
+    router.push("/login");
   };
 
   return (
