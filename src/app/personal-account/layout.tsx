@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
-import Header from "@/components/custom/header";
+import {
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 
 export default function PersonalAccountLayout({
   children,
@@ -7,9 +11,13 @@ export default function PersonalAccountLayout({
   children: ReactNode;
 }) {
   return (
-    <>
-      <Header />
-      <main className={"container mx-auto px-4 py-3"}>{children}</main>
-    </>
+    <SidebarProvider>
+      <Sidebar />
+
+      <main className={"container mx-auto px-4 py-3"}>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 }
