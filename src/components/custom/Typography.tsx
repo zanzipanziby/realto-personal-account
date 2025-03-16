@@ -31,7 +31,7 @@ type AsProp<C extends React.ElementType> = {
 };
 
 type BaseProps = {
-  variant: VariantType;
+  variant?: VariantType;
   className?: string;
 };
 
@@ -46,7 +46,7 @@ export type TypographyProps<C extends React.ElementType> =
 
 export const Typography = <C extends React.ElementType = "p">({
   as,
-  variant,
+  variant = "p1",
   className,
   children,
   ...props
