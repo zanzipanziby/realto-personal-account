@@ -6,112 +6,66 @@ import {
 } from "@/components/ui/accordion";
 import { Typography } from "@/components/custom/Typography";
 import PdfViewer from "@/components/custom/PdfViewer";
+import { designContent } from "@/types/design";
+import Image from "next/image";
 
 export default function DesignPage() {
-  const pdfUrl = "/example.pdf";
+  //const pdfUrl = "/example.pdf";
+
   return (
     <>
       <Typography variant={"h1"} as={"h1"} className={"text-center"}>
         Дизайн-проект
       </Typography>
-      <Accordion type={"single"} collapsible={true}>
-        <AccordionItem value={"item-1"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 1
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-            <PdfViewer pdfUrl={pdfUrl} />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value={"item-2"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 2
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value={"item-3"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 3
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value={"item-4"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 4
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value={"item-5"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 5
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value={"item-6"}>
-          <AccordionTrigger>
-            <Typography as={"h2"} variant={"h2"}>
-              Step 6
-            </Typography>
-          </AccordionTrigger>
-          <AccordionContent>
-            <Typography as={"p"} variant={"h4"}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-              consectetur et fuga, illo mollitia officia pariatur quis sapiente
-              tempora veritatis! Autem error eum iure! Excepturi ipsa nostrum
-              numquam quo quod, suscipit. Aperiam asperiores assumenda aut ex.
-              Assumenda atque ex maxime?
-            </Typography>
-          </AccordionContent>
-        </AccordionItem>
+      <Accordion type={"single"} collapsible>
+        {designContent.map((item) => {
+          return (
+            <AccordionItem value={item.title} key={item.title}>
+              <AccordionTrigger>
+                <Typography as={"h2"} variant={"h2"}>
+                  {item.title}
+                </Typography>
+              </AccordionTrigger>
+              <AccordionContent>
+                <Accordion type={"single"} collapsible>
+                  {item.dataList.map((dataListItem) => {
+                    return (
+                      <AccordionItem
+                        value={dataListItem.title}
+                        key={dataListItem.title}
+                      >
+                        <AccordionTrigger>
+                          <Typography as={"h3"} variant={"h4"}>
+                            {dataListItem.title}
+                          </Typography>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          {dataListItem.description && (
+                            <Typography>{dataListItem.description}</Typography>
+                          )}
+                          {dataListItem.pdfUrl && (
+                            <PdfViewer pdfUrl={dataListItem.pdfUrl} />
+                          )}
+                          {dataListItem.imageUrls?.length &&
+                            dataListItem.imageUrls.map((image, i) => {
+                              return (
+                                <Image
+                                  key={i}
+                                  src={image}
+                                  alt={"картинка"}
+                                  height={200}
+                                />
+                              );
+                            })}
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </AccordionContent>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
     </>
   );
