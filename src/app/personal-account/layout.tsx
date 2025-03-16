@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
-import {
-  Sidebar,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/custom/AppSidebar";
+import { Container } from "@/components/custom/Container";
 
 export default function PersonalAccountLayout({
   children,
@@ -12,11 +10,10 @@ export default function PersonalAccountLayout({
 }) {
   return (
     <SidebarProvider>
-      <Sidebar />
-
+      <AppSidebar />
       <main className={"container mx-auto px-4 py-3"}>
         <SidebarTrigger />
-        {children}
+        <Container>{children}</Container>
       </main>
     </SidebarProvider>
   );
