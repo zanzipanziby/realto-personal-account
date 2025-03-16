@@ -37,7 +37,7 @@ const PdfViewer = ({ pdfUrl }: PdfViewerProps) => {
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
         <Page
           pageNumber={pageNumber}
-          width={window.innerWidth > 768 ? 800 : 360}
+          width={window.innerWidth > 768 ? 550 : 360}
         />
       </Document>
       {/* Пагинация */}
